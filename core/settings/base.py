@@ -37,7 +37,7 @@ INTERNAL_APPS = [
 ]
 
 EXTERNAL_APPS = [
-
+    'rest_framework'
 ]
 
 HIGHLEVEL_APPS = [
