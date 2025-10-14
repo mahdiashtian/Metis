@@ -6,6 +6,10 @@ __pycache__/
 # Idea file
 .idea
 
+# Migrations
+**/migrations/
+!**/migrations/__init__.py
+
 # C extensions
 *.so
 
