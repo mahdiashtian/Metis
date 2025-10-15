@@ -1,8 +1,23 @@
 from django.contrib.auth import get_user_model
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 
+from accounts.models.notifications import Notification
+from accounts.services.notification import NotificationService
+from library.choices import NotificationTypeChoices
+
 User = get_user_model()
+
+sms_service = NotificationService(type_='sms')
+email_service = NotificationService(type_='email')
+
+
+@receiver(post_save, sender=Notification)
+def send_notification(sender, instance: Notification, created, **kwargs):
+    if created:
+        if instance.type == NotificationTypeChoices.WARNING:
+            sms_service.send(to=instance.user.phone_number, message=instance.content)
+        email_service.send(to=instance.user.email, message=instance.content)
 
 
 @receiver(pre_save, sender=User)
