@@ -15,8 +15,8 @@ sms = api.sms()
 
 @shared_task
 def send_sms(to, subject=None, message=None):
-    subject = subject if subject else 'CoNote'
-    message = message if message else 'Welcome to CoNote'
+    subject = subject if subject else 'Metis'
+    message = message if message else 'Welcome to Metis'
     text = f"{subject}: {message}"
     sms.send(to, SMS_FROM, text)
 
