@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Union, Optional
 
-from informing.tasks import send_email, send_sms
+from accounts.tasks import send_email, send_sms
 
 
 class Notification(ABC):
@@ -59,5 +59,3 @@ class NotificationService:
         notification: Union[SMSNotification, EmailNotification] = cls.type_[type_]()
         notification_instance: Union[Sms, Email] = notification.setup()
         return notification_instance
-
-

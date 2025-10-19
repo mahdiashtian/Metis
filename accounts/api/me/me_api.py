@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.generics import UpdateAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from accounts.api.me.serializers import ReadMeSerializer, MeWriteSerializer
+from accounts.api.me.serializers import ReadMeSerializer, WriteMeSerializer
 from library.exceptions import UserNotFound
 
 User = get_user_model()
@@ -26,5 +26,5 @@ class MeApi(UpdateAPIView, RetrieveAPIView):
             case "get":
                 serializer_class = ReadMeSerializer
             case "patch" | "pit":
-                serializer_class = MeWriteSerializer
+                serializer_class = WriteMeSerializer
         return serializer_class
