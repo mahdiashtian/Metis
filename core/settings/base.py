@@ -37,7 +37,8 @@ INTERNAL_APPS = [
 ]
 
 EXTERNAL_APPS = [
-    'rest_framework'
+    'rest_framework',
+    'drf_spectacular'
 ]
 
 HIGHLEVEL_APPS = [
@@ -150,6 +151,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     'PAGE_SIZE': 11,
 }
 
@@ -220,4 +223,11 @@ LOGGING = {
             "propagate": True,
         },
     }
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Metis',
+    'DESCRIPTION': 'Management system',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
