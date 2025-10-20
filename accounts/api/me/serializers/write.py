@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from accounts.api.me.serializers import ReadMeSerializer
 from library.exceptions.conflict import PhoneAlreadyExists, EmailAlreadyExists
-from django.forms import formset_factory
+from accounts.api.me.serializers.read import ReadMeSerializer
+
 User = get_user_model()
 
 
