@@ -10,7 +10,6 @@ from accounts.api.auth.serializers import ReadTokenObtainPairSerializer, WriteTo
     tags=['Auth'],
     methods=['post'],
     filters=False,
-    summary="",
     request=WriteTokenObtainPairSerializer,
     responses={
         status.HTTP_200_OK: OpenApiResponse(

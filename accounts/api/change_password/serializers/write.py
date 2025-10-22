@@ -7,7 +7,7 @@ from library.exceptions.validation import InvalidPassword, PasswordsDoNotMatch
 User = get_user_model()
 
 
-class ChangePasswordSerializer(serializers.Serializer):
+class WriteChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True, write_only=True)
     new_password = serializers.CharField(required=True, write_only=True)
     new_password_repeat = serializers.CharField(required=True, write_only=True)
