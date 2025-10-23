@@ -9,7 +9,7 @@ from accounts.api.verify.verify_api import TokenVerifyApi
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('departments', DepartmentApi)
+router.register('departments', DepartmentApi, basename='departments')
 urlpatterns = [
     path('auth/', TokenObtainPairApi.as_view()),
     path('me/', MeApi.as_view()),

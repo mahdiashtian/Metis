@@ -39,7 +39,8 @@ INTERNAL_APPS = [
 EXTERNAL_APPS = [
     'rest_framework',
     'drf_spectacular',
-    'guardian'
+    'guardian',
+    'django_filters'
 ]
 
 HIGHLEVEL_APPS = [
