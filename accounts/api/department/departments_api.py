@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter, OpenApiResponse
 from rest_framework import mixins, status
@@ -79,9 +80,14 @@ from accounts.models.departments import Department
     )
 )
 class DepartmentApi(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin):
-    queryset = Department.objects.select_related('owner').prefetch_related('users').all()
     serializer_class = ReadDepartmentSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [OrderingFilter, SearchFilter]
     ordering = ['id']
     search_fields = ['title']
+
+    def get_queryset(self):
+        user = self.request.user
+        return Department.objects.select_related('owner').prefetch_related('users').filter(
+            Q(owner=user) | Q(users=user)
+        )
