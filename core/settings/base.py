@@ -13,7 +13,6 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-import rest_framework.authentication
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,7 +38,8 @@ INTERNAL_APPS = [
 
 EXTERNAL_APPS = [
     'rest_framework',
-    'drf_spectacular'
+    'drf_spectacular',
+    'guardian'
 ]
 
 HIGHLEVEL_APPS = [
@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     *INTERNAL_APPS,
     *EXTERNAL_APPS,
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -147,11 +146,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Auth user model
 AUTH_USER_MODEL = 'accounts.User'
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)
+
 # Rest framework
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-        "rest_framework.authentication.SessionAuthentication", # For debug
+        "rest_framework.authentication.SessionAuthentication",  # For debug
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
